@@ -1,5 +1,6 @@
 package controller;
 
+import model.Address;
 import model.Person;
 import view.ClientView;
 
@@ -31,14 +32,15 @@ public class ClientController implements ActionListener {
         this.currentIndex = selectedRow;
         addActionListeners();
     }
-    public ClientController(ClientListController clientListController) {
-        this.clientListController = clientListController;
-        this.clients = clientListController.getClients();
-        Person selectedClient = clients.get(0);
-        this.clientView = new ClientView(this, selectedClient);
-        this.currentIndex = 0;
-        addActionListeners();
-    }
+
+    //    public ClientController(ClientListController clientListController) {
+//        this.clientListController = clientListController;
+//        //this.clients = personPersistenceController.getClients();
+//        Person selectedClient = clients.get(0);
+//        this.clientView = new ClientView(this, selectedClient);
+//        this.currentIndex = 0;
+//        addActionListeners();
+//    }
     public void addActionListeners() {
         clientView.getAddButton().addActionListener(this);
         clientView.getNextButton().addActionListener(this);
@@ -46,17 +48,26 @@ public class ClientController implements ActionListener {
         clientView.getUpdateButton().addActionListener(this);
         clientView.getDeleteButton().addActionListener(this);
         clientView.getClearButton().addActionListener(this);
+        clientView.getBackButton().addActionListener(this);
+        clientView.getSubmitButton().addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         JButton actionSource = (JButton)e.getSource();
+        if (actionSource == clientView.getBackButton()) {
+            this.clientView.dispose();
+            clientListController.showListView();
+        }
         if (actionSource == clientView.getAddButton()) {
-            //checkIndex();
-            //clientView.displayButton("submit");
+            //clientView.clearFields();
+            //PersonPersistenceController personPersistenceController1 = new PersonPersistenceController();
+            //personPersistenceController.getClients().add(clientView.createClient());
+            //personPersistenceController.writeClientFile();
+            //Person newClient = clientView.createClient();
+            //clients.add(newClient);
+            //currentIndex = clients.indexOf(newClient);
             clientView.clearFields();
-            //clientView.hideButton("update");
-            //clientView.hideButton("add");
         }
 
         if (actionSource == clientView.getSubmitButton()) {
@@ -66,21 +77,17 @@ public class ClientController implements ActionListener {
             currentIndex = clients.indexOf(newClient);
             System.out.println("currentIndex = " + currentIndex );
             System.out.println(newClient);
+            clientView.displayClient(clients.get(currentIndex));
             //display message indicating the 'add' operation was successful
             clientView.setDisplayMessage(String.format("ADDED %s %s. \ncurrent index = ", newClient.getFirstName(), newClient.getLastName()) + currentIndex);
-            //clientView.hideButton("submit");
-            //clientView.displayButton("update");
-            //clientView.displayButton("add");
-            //checkIndex();
-            clientView.displayClient(clients.get(currentIndex));
+
         }
 
         if (actionSource == clientView.getNextButton()) {
-            //checkIndex();
             //take care of indexoutofBoundException
             if (currentIndex < clients.size() - 1) {
                 currentIndex = currentIndex + 1;
-                clientView.displayClient(clients.get(currentIndex));
+                displayClient(currentIndex);
                 clientView.setDisplayMessage("currentIndex = " + currentIndex);
             }
             else {
@@ -88,12 +95,11 @@ public class ClientController implements ActionListener {
             }
         }
         if (actionSource == clientView.getPreviousButton()) {
-            //checkIndex();
             //to avoid indexoutofBoundException, do not allow the navigation to go outside of the collection
-            if (currentIndex > 0) {
+            if (currentIndex >= 1) {
                 //navigate the collection
-                currentIndex = currentIndex -1;
-                clientView.displayClient(clients.get(currentIndex));
+                currentIndex = currentIndex - 1;
+                displayClient(currentIndex);
                 clientView.setDisplayMessage("currentIndex = " + currentIndex);
             }
             else {
@@ -102,19 +108,17 @@ public class ClientController implements ActionListener {
         }
 
         if (actionSource == clientView.getUpdateButton()) {
-            //checkIndex();
             //check for null, and other data validations
             Person updatedClient = clientView.createClient();
             clients.set(currentIndex, updatedClient);
             clientView.setDisplayMessage("updated client. \ncurrent index = " + currentIndex);
+            clientListController.getPersonPersistenceController().writeClientFile();
             //consider all scenarios when this button will be activated - eg. clear all fields and then update?
         }
         if (actionSource == clientView.getDeleteButton()) {
-            //checkIndex();
             clients.remove(currentIndex);
-            currentIndex = currentIndex -1;
-            if (clients.size() >= 0) {
-                clientView.displayClient(clients.get(currentIndex));
+            if (clients.size() > 0) {
+                clientView.displayClient(clients.get(currentIndex - 1));
             }
             else {
                 clientView.clearFields();
@@ -128,25 +132,6 @@ public class ClientController implements ActionListener {
         }
     }
 
-    /*public void checkIndex() {
-        if (currentIndex == 0) {
-            clientView.hideButton("previous");
-            clientView.displayButton("next");
-        }
-        else if (currentIndex == clients.size() - 1) {
-            clientView.hideButton("next");
-            clientView.displayButton("previous");
-        }
-        else if (currentIndex > 0 && currentIndex < clients.size() - 1) {
-            clientView.displayButton("previous");
-            clientView.displayButton("next");
-        }
-        else if (currentIndex == -1) {
-            clientView.hideButton("previous");
-            clientView.displayButton("next");
-        }
-    }*/
-
     public void displayClient(int index) {
         if (index == -1) {
             clientView.clearFields();
@@ -154,7 +139,7 @@ public class ClientController implements ActionListener {
         else {
             Person previousClient = clients.get(index);
             clientView.displayClient(previousClient);
-            clientView.setDisplayMessage("");
+            clientView.setDisplayMessage("current index = \" + currentIndex");
         }
     }
 

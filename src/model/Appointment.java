@@ -8,9 +8,6 @@ public class Appointment implements Printable, Serializable {
     protected LocalDate dropoff;   //date of appointment
     protected String appointment_details;
 
-    public Appointment() {
-    }
-
     public Appointment(Dog dog, LocalDate dropoff) {
         this.dog = dog;
         this.dropoff = dropoff;

@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Dog {
+public class Dog implements Serializable {
     private String name;
     private String lastName;
     private Genders gender;
@@ -12,15 +13,18 @@ public class Dog {
     private LocalDate dob;
     private String health_problems;
     private Aggression aggressive;     //are they aggressive?
-    public enum Aggression {Yes, No, Unknown}
+    public enum Aggression {Unknown, Yes, No}
+    private Size size;      //size of dog
+    public enum Size {Small, Medium, Large}
     private Person owner;
 
-    public Dog(String name, Genders gender, String breed, String color, LocalDate dob, String health_problems, Aggression aggressive, Person owner) {
+    public Dog(String name, Genders gender, String breed, String color, Size size, LocalDate dob, String health_problems, Aggression aggressive, Person owner) {
         this.name = name;
         this.lastName = owner.getLastName();
         this.gender = gender;
         this.breed = breed;
         this.color = color;
+        this.size = size;
         this.dob = dob;
         this.health_problems = health_problems;
         this.aggressive = aggressive;
@@ -67,6 +71,10 @@ public class Dog {
         this.color = color;
     }
 
+    public Size getSize() {return size;}
+
+    public void setSize(Size size) {this.size = size;}
+
     public LocalDate getDob() { return dob; }
 
     public void setDob(LocalDate dob) {
@@ -106,10 +114,11 @@ public class Dog {
                 ", gender='" + gender + '\'' +
                 ", breed='" + breed + '\'' +
                 ", color='" + color + '\'' +
+                ", size='" + size + '\'' +
                 ", dob=" + dob +
                 ", health_problems='" + health_problems + '\'' +
                 ", aggressive=" + aggressive +
-                ", owner=" + owner +
+                ", owner=" + owner.getFirstName() + " " + owner.getLastName() +
                 '}';
     }
 }

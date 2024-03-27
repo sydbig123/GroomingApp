@@ -14,8 +14,8 @@ public class ClientListView extends JFrame {
     private JButton newClientButton;
     private JButton showDetailsButton;
     private JButton doneButton;
-    private JButton paymentListBtn;
-    private static final int FRAME_WIDTH = 500;
+    private JButton dogListBtn;
+    private static final int FRAME_WIDTH = 600;
     private static final int FRAME_HEIGHT = 600;
     private ClientListController clientListController;
 
@@ -40,8 +40,8 @@ public class ClientListView extends JFrame {
         return clientTable;
     }
 
-    public JButton getPaymentListBtn() {
-        return paymentListBtn;
+    public JButton getDogListBtn() {
+        return dogListBtn;
     }
 
     public void createListComponents() {

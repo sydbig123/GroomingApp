@@ -6,6 +6,7 @@ import java.util.List;
 public class DogTableModel extends AbstractTableModel {
     private String[] columnNames = {"First Name", "Last Name", "Breed", "Color"}; //Header values
     private List<Dog> dogList;
+
     //constructor
     public DogTableModel(List<Dog> dogList) {
         this.dogList = dogList;

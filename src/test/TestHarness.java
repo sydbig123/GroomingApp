@@ -36,13 +36,14 @@ public class TestHarness {
     public void testDog() {
         Address address = new Address("123 House Rd.", "State College", Address.State.PA, "16801");
         Person client = new Person("Sydney", "Smith", "1234567890", address, "email@email.com");
-        Dog dog = new Dog("Matthew", Dog.Genders.Female , "N/A", "Brown", LocalDate.of(2011, 01, 01), "None", Dog.Aggression.Unknown, client);
+        Dog dog = new Dog("Matthew", Dog.Genders.Female , "N/A", "Brown", Dog.Size.Medium, LocalDate.of(2011, 01, 01), "None", Dog.Aggression.Unknown, client);
 
         System.out.println(dog.getName());
         System.out.println(dog.getLastName());
         System.out.println(dog.getGender());
         System.out.println(dog.getBreed());
         System.out.println(dog.getColor());
+        System.out.println(dog.getSize());
         System.out.println(dog.getDob());
         System.out.println(dog.getHealth_problems());
         System.out.println(dog.getAggressive());
@@ -52,6 +53,7 @@ public class TestHarness {
         dog.setGender(Dog.Genders.Male);
         dog.setBreed("Maltese/Poodle Mix");
         dog.setColor("Brown/white");
+        dog.setSize(Dog.Size.Small);
         dog.setDob(LocalDate.of(07, 18, 2011));
         dog.setHealth_problems("Hip problems");
         dog.setAggressive(Dog.Aggression.No);
@@ -64,7 +66,7 @@ public class TestHarness {
     public void testClassHierarchy() {
         ArrayList<Appointment> appointments = new ArrayList<>();
         Person client = new Person("Abby", "Biggar", "321-321-3210", new Address("123 House Rd.", "State College", Address.State.PA, "16801"), "email@email.com");
-        Dog dog = new Dog("Tucker", Dog.Genders.Male, "Maltese/Poodle", "Brown/white", LocalDate.of(2011, 07, 2011), "None", Dog.Aggression.No, client);
+        Dog dog = new Dog("Tucker", Dog.Genders.Male, "Maltese/Poodle", "Brown/white", Dog.Size.Small, LocalDate.of(2011, 07, 17), "None", Dog.Aggression.No, client);
 
         Appointment app = new Appointment(dog, LocalDate.of(2023, 10, 5));
         ArrayList<String> grooming_services = new ArrayList<>();

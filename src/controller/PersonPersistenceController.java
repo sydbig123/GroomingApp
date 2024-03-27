@@ -33,7 +33,8 @@ public class PersonPersistenceController {
             out.writeObject(clients);
             out.close();
             System.out.println("successful in writing data to file");
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             System.out.println("caught exception while writing to file: " + e.getMessage());
         }
     }
@@ -46,16 +47,17 @@ public class PersonPersistenceController {
             in = new ObjectInputStream(fis);
             clients = (ArrayList) in.readObject();
             in.close();
-        } catch (IOException | ClassNotFoundException e) {
+        }
+        catch (IOException | ClassNotFoundException e) {
             System.out.println("caught exception while reading from file: " + e.getMessage());
         }
         System.out.println("successful in reading from file");
     }
 
     public void createInitialElements() {
-        Person client1 = new Person("Abby", "Biggar", "321-321-3210", new Address("123 House Rd.", "State College", Address.State.PA, "16801"), "abby@email.com");
-        Person client2 = new Person("Sydney", "Smith", "123-456-7890", new Address("123 College Rd.", "State College", Address.State.PA, "16801"), "sydney@email.com");
-        Person client3 = new Person("Adina", "Brenner", "301-111-2313", new Address("123 Home St.", "Newark", Address.State.DE, "19716"), "adina@email.com");
+        Person client1 = new Person("Charlie", "Brown", "321-321-3210", new Address("123 House Rd.", "State College", Address.State.PA, "16801"), "charlie@email.com");
+        Person client2 = new Person("Shaggie", "Doo", "123-456-7890", new Address("123 College Rd.", "State College", Address.State.PA, "16801"), "shaggie@email.com");
+        Person client3 = new Person("Dorothy", "Gale", "301-111-2313", new Address("123 Home St.", "Newark", Address.State.KS, "19716"), "dorothy@email.com");
         clients.add(client1);
         clients.add(client2);
         clients.add(client3);

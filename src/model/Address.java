@@ -1,5 +1,7 @@
 package model;
 
+import view.DogView;
+
 public class Address {
     private String street;
     private String city;
@@ -15,6 +17,7 @@ public class Address {
         this.city = city;
         this.zipcode = zipcode;
         this.state = state;
+
     }
 
     public String getStreet() {
@@ -52,9 +55,8 @@ public class Address {
     @Override
     public String toString() {
         return String.format(
-                street + "\n" +
-                city  + ", " + state  + " " + zipcode);
+                street + " " +
+                        city  + ", " + state  + " " + zipcode);
     }
-
 
 }

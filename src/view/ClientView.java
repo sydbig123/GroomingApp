@@ -29,8 +29,9 @@ public class ClientView extends JFrame{
     private JTextField zipcodeInput;
     private JTextField cityInput;
     private JComboBox stateInput;
+    private JButton backButton;
     private ClientController clientController;
-    private static final int FRAME_WIDTH = 500;
+    private static final int FRAME_WIDTH = 600;
     private static final int FRAME_HEIGHT = 600;
 
 
@@ -50,7 +51,7 @@ public class ClientView extends JFrame{
         this.stateInput.setModel(new DefaultComboBoxModel(Address.State.values())) ;
         this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         this.setTitle("Client GUI Screen");
-        //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
     }
 
@@ -80,8 +81,9 @@ public class ClientView extends JFrame{
     public JButton getSubmitButton() {
         return submitButton;
     }
-
-
+    public JButton getBackButton() {
+        return backButton;
+    }
 
     //read the JText values
     public Person createClient() {
@@ -125,42 +127,5 @@ public class ClientView extends JFrame{
     public void setDisplayMessage(String message) {
         this.messageLabel.setText(message);
     }
-
-
-    /*public void hideButton(String btn) {
-        if (btn.equals("previous")) {
-            previousButton.setVisible(false);
-        }
-        if (btn.equals("next")) {
-            previousButton.setVisible(false);
-        }
-        if (btn.equals("add")) {
-            previousButton.setVisible(false);
-        }
-        if (btn.equals("update")) {
-            previousButton.setVisible(false);
-        }
-        if (btn.equals("submit")) {
-            submitButton.setVisible(false);
-        }
-    }
-
-    public void displayButton(String btn) {
-        if (btn.equals("previous")) {
-            previousButton.setVisible(true);
-        }
-        if (btn.equals("next")) {
-            previousButton.setVisible(true);
-        }
-        if (btn.equals("add")) {
-            previousButton.setVisible(true);
-        }
-        if (btn.equals("update")) {
-            previousButton.setVisible(true);
-        }
-        if (btn.equals("submit")) {
-            submitButton.setVisible(true);
-        }
-    }*/
 
 }
